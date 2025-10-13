@@ -1,0 +1,17 @@
+services:
+  spring-rest-service:
+    #image: docker.io/library/spring-petclinic:3.5.0-SNAPSHOT
+    #image: springcommunity/spring-petclinic-rest:3.4.3
+    image: spring-rest-service:feature
+    #deploy:
+    #  replicas: 10
+    #environment:
+    #  SPRING_APPLICATION_JSON: '{
+    #      "spring.jpa.show-sql": "false",
+    #      "spring.jpa.properties.hibernate.show_sql": "false",
+    #      "server.tomcat.threads.max": 8000
+    #    }'
+    expose:
+      - "8081"
+    ports:
+      - "8081:8081"

@@ -1,0 +1,14 @@
+experiment:
+  type: baseline_idle_no_tools
+  duration: 720
+  iterations: 1
+  wait_between_runs: 10
+  interval: "*/1 * * * * ?"
+
+  target_host: 127.0.0.1
+  remote_dir: /home/user
+  powercap_jar_filename: powercap-reader-1.0-runner.jar
+  procfs_jar_filename: procfs-reader-1.0-runner.jar
+
+  local_output_directory: ./output
+  rittal_jar_path: C:\rittal-reader\target\rittal-reader-1.0-runner.jar

@@ -1,0 +1,11 @@
+extends: ./configuration/spring_docker_jmeter.yml
+experiment:
+  type: spring_docker_scaphandre
+
+  http_logger_jar_path: C:\http-logger\target\http-logger-1.0-runner.jar
+  
+  http_logger_url: http://127.0.0.1:8888/metrics
+
+  remote_docker_start: docker compose -f /home/user/spring-rest-service/docker-compose.yaml -f /home/user/spring-rest-service/docker-compose.override.scaphandre.yaml up -d
+  remote_docker_stop: docker compose -f /home/user/spring-rest-service/docker-compose.yaml -f /home/user/spring-rest-service/docker-compose.override.scaphandre.yaml down
+  remote_docker_logs: docker compose -f /home/user/spring-rest-service/docker-compose.yaml logs

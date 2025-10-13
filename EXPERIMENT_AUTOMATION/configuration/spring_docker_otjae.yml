@@ -1,0 +1,7 @@
+extends: ./configuration/spring_docker_jmeter.yml
+experiment:
+  type: spring_docker_otjae
+
+  remote_docker_start: docker compose -f /home/user/spring-rest-service/docker-compose.yaml -f /home/user/spring-rest-service/docker-compose.override.otel.yaml up -d
+  remote_docker_stop: docker compose -f /home/user/spring-rest-service/docker-compose.yaml -f /home/user/spring-rest-service/docker-compose.override.otel.yaml down
+  remote_docker_logs: docker compose -f /home/user/spring-rest-service/docker-compose.yaml logs

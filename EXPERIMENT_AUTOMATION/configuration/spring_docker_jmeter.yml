@@ -1,0 +1,74 @@
+experiment:
+  type: spring_docker_jmeter
+  duration: 720
+  iterations: 1
+  wait_between_runs: 10
+  interval: "*/1 * * * * ?"
+
+  target_host: 127.0.0.1
+  remote_dir: /home/user
+  powercap_jar_filename: powercap-reader-1.0-runner.jar
+  procfs_jar_filename: procfs-reader-1.0-runner.jar
+
+  local_output_directory: ./output
+  rittal_jar_path: C:\tools\rittal-reader\target\rittal-reader-1.0-runner.jar
+
+  remote_docker_start: docker compose -f /home/user/spring-rest-service/docker-compose.yaml up -d
+  remote_docker_stop: docker compose -f /home/user/spring-rest-service/docker-compose.yaml down
+  remote_docker_logs: docker compose -f /home/user/spring-rest-service/docker-compose.yaml logs
+
+# =============================
+# JMeter (fully optional block)
+# For the Jmeter parameters to work you need to use v0.0.18-alpha of this Jmeter script: https://github.com/RETIT/opentelemetry-javaagent-extension/blob/v0.0.18-alpha/examples/spring-rest-service/src/test/resources/jmeter_testplan.jmx
+# =============================
+jmeter:
+  enabled: true
+  download_logs: true   # default True; set false to fetch only .jtl
+  # Where JMeter runs and how to connect
+  target_host: odoo.cs.hm.edu
+  remote_dir: /home/jmeter/output/         # <— used for .jtl and .log (timestamped)
+  bin_path: /home/jmeter/apache-jmeter-5.6.3/bin/jmeter.sh
+
+  heap_xms: 8g          # -> -Xms8g
+  heap_xmx: 8g          # -> -Xmx8g
+  extra_jvm_args: ""     # optional, e.g. "-XX:+UseG1GC -XX:MaxGCPauseMillis=200"
+
+  # What to run
+  test_plan: /home/jmeter/jmeter_testplan.jmx
+
+  # Optional runtime properties passed as -J key=value
+  # The contextPath "tools.descartes.teastore.webui/" is used to set hardcoded values in the JMX file
+  props:
+    hostname: 127.0.0.1
+    port: 8081
+
+    total_rate: 560 # target throughput in ops per second per transaction
+    steady_state: 600 #seconds
+    ramp_up_and_down: 60 # ramp up time in seconds
+
+    # Summariser prints periodic stats; results still go to .jtl
+    summariser.name: summary
+    summariser.interval: 10
+    summariser.log: true
+    summariser.out: true
+
+    # Keep result files small (passed as -J…)
+    jmeter.save.saveservice.output_format: csv
+    jmeter.save.saveservice.assertion_results: none
+    jmeter.save.saveservice.response_data: false
+    jmeter.save.saveservice.response_headers: false
+    jmeter.save.saveservice.request_headers: false
+    jmeter.save.saveservice.samplerData: false
+    jmeter.save.saveservice.response_data.on_error: false
+    jmeter.save.saveservice.url: false
+    jmeter.save.saveservice.latency: true
+    jmeter.save.saveservice.connect_time: true
+    jmeter.save.saveservice.bytes: true
+    jmeter.save.saveservice.sent_bytes: true
+    jmeter.save.saveservice.label: true
+    jmeter.save.saveservice.success: true
+    jmeter.save.saveservice.response_code: true
+    jmeter.save.saveservice.time: true
+
+  # Optional: wait time (seconds) after graceful shutdown to let summariser flush
+  summary_wait_secs: 60
