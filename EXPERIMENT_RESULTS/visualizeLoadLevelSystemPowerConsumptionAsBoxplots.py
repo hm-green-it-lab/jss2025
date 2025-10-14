@@ -225,6 +225,7 @@ def plot_all_load_levels_in_one_row(data_by_load, output_path, scenario_suffixes
         # Plot boxplot if data exists
         if box_data:
             bp = ax.boxplot(box_data, patch_artist=True, medianprops=dict(color="grey", linewidth=2.5),
+                            widths=0.7,
                             showmeans=True,
                             meanprops={"marker": "x", "markerfacecolor": "red", "markeredgecolor": "red", "markersize": 10})
             ax.set_xticklabels(box_labels, rotation=0, ha='right', fontsize=18)
@@ -422,7 +423,7 @@ def main():
         plt.plot(load_labels, pem_deltas, marker='o', label=r'$\Delta P_{EM}$')
         plt.plot(load_labels, ps_deltas, marker='s', label=r'$\Delta P_{S}$')
         plt.xlabel('Load Level (T/s)', fontsize=16)
-        plt.ylabel('$P\Delta$ (W)', fontsize=16)
+        plt.ylabel('$\Delta P$ (W)', fontsize=16)
         #plt.title('$P\Delta$ vs. Load Level', fontsize=18)
         plt.legend(fontsize=14)
         plt.grid(True, linestyle='--', alpha=0.7)

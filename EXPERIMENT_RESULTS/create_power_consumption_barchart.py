@@ -228,7 +228,7 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
         for i, (bar, value) in enumerate(zip(bars_rittal, rittal_means)):
             if not np.isnan(value) and value > 0:
                 ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
-                        '100%', ha='center', va='bottom', fontsize=7, fontweight='bold', rotation=90)
+                        '100%', ha='center', va='bottom', fontsize=10, fontweight='bold', rotation=90)
         bar_position += 1
         # RAPL data
         rapl_data = tool_data[tool_data['Type'] == 'RAPL']
@@ -246,7 +246,7 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
             if not np.isnan(rapl_val) and not np.isnan(rittal_val) and rittal_val > 0:
                 percentage = (rapl_val / rittal_val) * 100
                 ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
-                        f'{percentage:.1f}%', ha='center', va='bottom', fontsize=7, fontweight='bold', rotation=90)
+                        f'{percentage:.1f}%', ha='center', va='bottom', fontsize=10, fontweight='bold', rotation=90)
         bar_position += 1
 
     # Scenario hatches for (Process)/(Transaction) distinction
@@ -284,16 +284,17 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
                     if rittal_mean > 0:
                         percentage = (scenario_val / rittal_mean) * 100
                         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
-                                f'{percentage:.1f}%', ha='center', va='bottom', fontsize=7, fontweight='bold', rotation=90)
+                                f'{percentage:.1f}%', ha='center', va='bottom', fontsize=10, fontweight='bold', rotation=90)
         bar_position += 1
 
     # Chart labeling and formatting
-    ax.set_xlabel('Load (Requests/Second)')
-    ax.set_ylabel('Power (Watts)')
-    ax.set_title('Power Consumption by Tool and Measurement Method')
+    ax.set_xlabel('Load (Requests/Second)', fontsize=16)
+    ax.set_ylabel('Power (Watts)', fontsize=16)
+    #ax.set_title('Power Consumption by Tool and Measurement Method', fontsize=16)
     ax.set_xticks(x)
-    ax.set_xticklabels([str(int(l)*3) for l in load_levels])
-    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    ax.set_xticklabels([str(int(l)*3) for l in load_levels], fontsize=14)
+    ax.tick_params(axis='y', labelsize=14)
+    ax.legend(loc='upper left', fontsize=16)
     ax.grid(True, alpha=0.3)
 
     # Add extra space at the top for percentage labels
