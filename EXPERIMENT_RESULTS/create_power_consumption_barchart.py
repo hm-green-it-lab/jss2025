@@ -85,42 +85,42 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
     """
     # Constants for different scenarios (in Watts)
     SCENARIO_CONSTANTS = {
-        'kepler (Process)': {
+        'Kepler (Container/Process)': {
             0: 0,
             230: 56.56,
             350: 104.84,
             480: 186.55,
             560: 221.82
         },
-        'scaphandre (Process)': {
+        'Scaphandre (Container/Process)': {
             0: 0,
             230: 49.08,
             350: 108.98,
             480: 188.99,
             560: 229.18
         },
-        'otjae (Process)': {
+        'OTJAE (Process)': {
             0: 0,
             230: 142.06,
             350: 176.91,
             480: 208.50,
             560: 238.35
         },
-        'joularjx (Process)': {
+        'JoularJX (Process)': {
             0: 0,
             230: 189.50,
             350: 213.05,
             480: 233.88,
             560: 244.16
         },
-        'otjae (Transaction)': {
+        'OTJAE (Transaction)': {
             0: 0,
             230: 138.44, #19.31+35.67+83.46
             350: 171.30, #23.47+44.48+103.35
             480: 200.92, #28.11+52.29+120.52
             560: 228.48, #32.69+59.29+136.50
         },
-        'joularjx (Transaction)': {
+        'JoularJX (Transaction)': {
             0: 0,
             230: 182.91, #23.64+45.73+113.54
             350: 199.92,#24.45+50.05+125.42
@@ -288,13 +288,13 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
         bar_position += 1
 
     # Chart labeling and formatting
-    ax.set_xlabel('Load (Requests/Second)', fontsize=16)
+    ax.set_xlabel('Load (T/s)', fontsize=16)
     ax.set_ylabel('Power (Watts)', fontsize=16)
     #ax.set_title('Power Consumption by Tool and Measurement Method', fontsize=16)
     ax.set_xticks(x)
     ax.set_xticklabels([str(int(l)*3) for l in load_levels], fontsize=14)
     ax.tick_params(axis='y', labelsize=14)
-    ax.legend(loc='upper left', fontsize=16)
+    ax.legend(loc='upper left', fontsize=14)
     ax.grid(True, alpha=0.3)
 
     # Add extra space at the top for percentage labels

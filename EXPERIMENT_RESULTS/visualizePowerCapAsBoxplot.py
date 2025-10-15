@@ -149,7 +149,7 @@ def main():
     ax.set_xticklabels(new_labels, fontsize=14)
 
     plt.xlabel("Load (T/s)", fontsize=14)
-    plt.ylabel("P_{S} (W)", fontsize=14)
+    plt.ylabel("$P_{S}$ (W)", fontsize=14)
 
     pdf_path = "../boxplot_total_power_by_load_and_run.pdf"
     plt.savefig(pdf_path, format="pdf")
