@@ -35,7 +35,67 @@ In addition to the Python analysis scripts, the following measurement tools were
 | [JoularJX](https://github.com/joular/joularjx) | Java agent for measuring energy consumption of JVM-based applications at the process, thread, and method level. |
 | [OTJAE](https://github.com/RETIT/opentelemetry-javaagent-extension) | OpenTelemetry Java-Agent Extension for attributing energy consumption to Java processes and transactions. |
 
-These tools were orchestrated and synchronized using the automation scripts described below to ensure reproducible and accurate measurements across all experiment runs.
+These tools were orchestrated and synchronized using the automation scripts described below to ensure reproducible and accurate measurements across all experiment runs. Before presenting the automation in detail, the next section explains the experiment initialization and setup required to prepare the servers and measurement environment.
+
+## Experiment Initialization / Setup
+
+Below we describe the server layout and the initial steps required to prepare the measurement and application servers used in the experiments. This section provides a high-level overview of the folders and resources that must be in place before running the automation in `EXPERIMENT_AUTOMATION/`.
+
+Server (Spring REST application) folder structure used for measurements; an equivalent layout is also available under [`./EXPERIMENT_AUTOMATION/docker/`](./EXPERIMENT_AUTOMATION/docker/):
+
+```
+spring-rest-service
+├── docker-compose.override.joularjx.yaml
+├── docker-compose.override.kepler.yaml
+├── docker-compose.override.otel.yaml
+├── docker-compose.override.scaphandre.yaml
+├── docker-compose.yaml
+├── joularjx
+│   ├── config.properties
+│   ├── joularjx-3.0.1.jar
+│   ├── joularjx-result
+│   ├── results
+│   └── zip
+└── otel
+    ├── io.retit.opentelemetry.javaagent.extension.jar
+    ├── opentelemetry-javaagent.jar
+    ├── otel_version
+    └── otjae_version
+```
+
+- `docker-compose.yaml` is the base compose file describing the Spring REST application.
+- The `docker-compose.override.*.yaml` files provide tool-specific overrides. Each override file enables and configures one measurement tooling stack (for example, Kepler, Scaphandre, JoularJX, or OTJAE).
+- The `joularjx/` directory contains the JoularJX agent jar and its configuration/results directories.
+- The `otel/` directory contains the OpenTelemetry agent(s) and the OpenTelemetry Java Agent Extension (OTJAE) artifacts used for OT-based attribution.
+
+### OTJAE (OpenTelemetry Java-Agent Extension) build
+
+For using the OTJAE project (the OpenTelemetry Java-Agent Extension), you need to build `io.retit.opentelemetry.javaagent.extension.jar`. Assume you have git, Java (JDK 11+), and Maven installed on the machine used to build the artifact.
+
+```bash
+# clone the OTJAE repository
+git clone https://github.com/RETIT/opentelemetry-javaagent-extension.git
+cd opentelemetry-javaagent-extension
+
+# Build the project and package the extension - skip tests for speed if you prefer
+mvn -DskipTests package
+
+# After a successful build locate the produced jar under target/ and copy it to your server folder
+cp extension-core/target/io.retit.opentelemetry.javaagent.extension-*.jar ../path/to/spring-rest-service/otel/io.retit.opentelemetry.javaagent.extension.jar
+```
+
+### JMeter server layout (brief)
+
+The JMeter driver host used for generating load contains an extracted [`apache-jmeter-5.6.3/`](https://jmeter.apache.org/download_jmeter.cgi) folder and the corresponding test plan.
+
+```
+jmeter-server
+├── apache-jmeter-5.6.3
+│   ├── bin
+│   ├── lib
+│   └── ...
+└── jmeter_testplan.jmx
+```
 
 ## Experiment Automation 
 
