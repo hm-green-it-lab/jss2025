@@ -16,8 +16,6 @@ Key directories and their contents:
 
 - [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/) – Experiment raw results including Python scripts for analysis and visualization of measurement results, e.g., [`visualizeLoadLevelContainerPowerConsumptionAsBoxplots.py`](./EXPERIMENT_RESULTS/visualizeLoadLevelContainerPowerConsumptionAsBoxplots.py), [`visualizeIdlePowerConsumptionAsBoxPlot.py`](./EXPERIMENT_RESULTS/visualizeIdlePowerConsumptionAsBoxPlot.py), etc.
 
-- `*.tex` – LaTeX files of the paper.
-
 ## Measurement Tools
 
 In addition to the Python analysis scripts, the following measurement tools were used to collect energy and performance data during the experiments:
