@@ -22,16 +22,16 @@ Key directories and their contents:
 
 In addition to the Python analysis scripts, the following measurement tools were used to collect energy and performance data during the experiments:
 
-| Tool | Description                                                                                                                                                                                |
-|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [PowercapReader](https://github.com/hm-green-it-lab/powercap-reader) | Java-based tool that continuously reads RAPL data via powercap on Linux. Used to collect power consumption measurements for the system.                                                    |
+| Tool | Description |
+| --- | --- |
+| [PowercapReader](https://github.com/hm-green-it-lab/powercap-reader) | Java-based tool that continuously reads RAPL data via powercap on Linux. Used to collect power consumption measurements for the system. |
 | [ProcFSReader](https://github.com/hm-green-it-lab/procfs-reader) | Java-based tool that continuously reads resource demand data (CPU, memory, I/O, network) for processes from the Linux proc file system. Used to collect process-level performance metrics. |
-| [RittalReader](https://github.com/hm-green-it-lab/rittal-reader) | Java-based tool for reading power data from Rittal PDU devices via SNMP. Used for external power measurements.                                                                             |
-| [JMeter](https://jmeter.apache.org/) | Load testing tool used to generate HTTP requests to the Spring REST application at controlled rates for each experiment scenario.                                                          |
-| [Kepler](https://github.com/sustainable-computing-io/kepler) | Kepler is a Prometheus exporter that measures energy consumption metrics at the container and process level.                                                                               |
-| [Scaphandre](https://github.com/hubblo-org/scaphandre) | Scaphandre is an agent for exposing server power and energy consumption metrics.                                                                                                           |
-| [JoularJX](https://github.com/joular/joularjx) | Java agent for measuring energy consumption of JVM-based applications at the process, thread, and method level.                                                                            |
-| [OTJAE](https://github.com/RETIT/opentelemetry-javaagent-extension) | OpenTelemetry Java-Agent Extension for attributing energy consumption to Java processes and transactions.                                                                                  |
+| [RittalReader](https://github.com/hm-green-it-lab/rittal-reader) | Java-based tool for reading power data from Rittal PDU devices via SNMP. Used for external power measurements. |
+| [JMeter](https://jmeter.apache.org/) | Load testing tool used to generate HTTP requests to the Spring REST application at controlled rates for each experiment scenario. |
+| [Kepler](https://github.com/sustainable-computing-io/kepler) | Kepler is a Prometheus exporter that measures energy consumption metrics at the container and process level. |
+| [Scaphandre](https://github.com/hubblo-org/scaphandre) | Scaphandre is an agent for exposing server power and energy consumption metrics. |
+| [JoularJX](https://github.com/joular/joularjx) | Java agent for measuring energy consumption of JVM-based applications at the process, thread, and method level. |
+| [OTJAE](https://github.com/RETIT/opentelemetry-javaagent-extension) | OpenTelemetry Java-Agent Extension for attributing energy consumption to Java processes and transactions. |
 
 These tools were orchestrated and synchronized using the automation scripts described below to ensure reproducible and accurate measurements across all experiment runs.
 
@@ -48,12 +48,12 @@ The experiments were conducted using a Spring REST application deployed in Docke
 The Python scripts in the [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/) folder process the raw data and generate the figures and tables used in the paper.
 
 | **Load Level (RPS)** | **Description** |
-|----------------------|-----------------|
-| 0                    | System idle, no external load applied. Serves as the baseline for energy and performance measurements. Results in CPU utilization of approximately 0%. |
-| 230                  | Moderate load: all three REST endpoints are stressed with 230 RPS. Results in CPU utilization of about 25%. |
-| 350                  | High load: all three REST endpoints are stressed with 350 RPS. Results in CPU utilization of roughly 50%. |
-| 480                  | Very high load: all three REST endpoints are stressed with 480 RPS. Results in CPU utilization of around 75%. |
-| 560                  | Maximum load: all three REST endpoints are stressed with 560 RPS. Results in CPU utilization close to 100%. |
+| --- | --- |
+| 0 | System idle, no external load applied. Serves as the baseline for energy and performance measurements. Results in CPU utilization of approximately 0%. |
+| 230 | Moderate load: all three REST endpoints are stressed with 230 RPS. Results in CPU utilization of about 25%. |
+| 350 | High load: all three REST endpoints are stressed with 350 RPS. Results in CPU utilization of roughly 50%. |
+| 480 | Very high load: all three REST endpoints are stressed with 480 RPS. Results in CPU utilization of around 75%. |
+| 560 | Maximum load: all three REST endpoints are stressed with 560 RPS. Results in CPU utilization close to 100%. |
 
 For each load level, the experiment was repeated three times to ensure validity. The results for each run are stored in dedicated `.zip` files within [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/), organized by load level and timestamps as mentioned. Each `.zip` archive contains all measurement data and logs for a single experiment run.
 
@@ -62,7 +62,7 @@ For each load level, the experiment was repeated three times to ensure validity.
 This repository contains several Python scripts for processing, analyzing, and visualizing the experimental results. These scripts are located in the [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/) folder:
 
 | Script Name | Description |
-|-------------|-------------|
+| --- | --- |
 | [`create_power_consumption_barchart.py`](./EXPERIMENT_RESULTS/create_power_consumption_barchart.py) | Processes measurement data and generates bar charts of power consumption for different loads and scenarios. |
 | [`visualizeIdlePowerConsumptionAsBoxPlot.py`](./EXPERIMENT_RESULTS/visualizeIdlePowerConsumptionAsBoxPlot.py) | Visualizes idle power consumption as boxplots to compare baseline measurements. |
 | [`visualizeLoadLevelContainerPowerConsumptionAsBoxplots.py`](./EXPERIMENT_RESULTS/visualizeLoadLevelContainerPowerConsumptionAsBoxplots.py) | Creates boxplots of container-level power consumption across different load levels. |
