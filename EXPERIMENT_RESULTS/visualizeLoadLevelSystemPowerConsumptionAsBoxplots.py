@@ -1,3 +1,9 @@
+"""
+visualizeLoadLevelSystemPowerConsumptionAsBoxplots.py
+
+Aggregate system-level power (EM/Rittal and RAPL) across experimental runs and produce boxplots per load level. Also prints a LaTeX table summarizing system power and CPU utilization.
+"""
+
 # Import required libraries
 import pandas as pd
 import numpy as np

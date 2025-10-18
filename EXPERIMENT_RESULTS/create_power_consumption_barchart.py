@@ -1,3 +1,13 @@
+"""
+create_power_consumption_barchart.py
+
+Utilities to load power measurement files (Rittal EM and Intel RAPL/powercap), aggregate them per load level and tool, and produce a combined bar chart comparing measurement types and scenario constants.
+
+This module contains file loading helpers and a single convenience function `create_power_consumption_barchart` that walks experiment directories, reads Rittal and powercap CSVs, computes means and plots grouped bar charts.
+
+This file is intended for offline analysis of experiment folders arranged under numeric load-level directories (e.g. `./230/`). It expects CSVs with certain column names as produced by the measurement tooling.
+"""
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -194,8 +204,6 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
     if df.empty:
         print("Warning: No data collected. Please check if the directories and files exist.")
         return
-
-
 
     # --- Color palette and tool mapping (from visualizePowerCapAsBoxplot.py) ---
     run_order = ["none", "OTJAE", "JoularJX", "Scaphandre", "Kepler"]
