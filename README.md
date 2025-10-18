@@ -16,8 +16,6 @@ Key directories and their contents:
 
 - [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/) – Experiment raw results including Python scripts for analysis and visualization of measurement results, e.g., [`visualizeLoadLevelContainerPowerConsumptionAsBoxplots.py`](./EXPERIMENT_RESULTS/visualizeLoadLevelContainerPowerConsumptionAsBoxplots.py), [`visualizeIdlePowerConsumptionAsBoxPlot.py`](./EXPERIMENT_RESULTS/visualizeIdlePowerConsumptionAsBoxPlot.py), etc.
 
-- [`FIGURE_SOURCES/`](./FIGURE_SOURCES/) – Source material for figures used in the paper.
-
 - [`references.bib`](./references.bib) – Bibliography database for the paper.
 
 - `*.tex` – LaTeX files of the paper.
