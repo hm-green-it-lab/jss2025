@@ -133,6 +133,13 @@ The following is an example folder structure on the JMeter load driver:
 The following tools need to be installed on your local environment:
 
 - Python (3.11+)
+  - To install all required dependencies for the Python scripts contained in this repository, you can use the requirements.txt. Just run `pip install -r requirements.txt`.
+- Git (2.35+)
+- [PowercapReader](https://github.com/hm-green-it-lab/powercap-reader)
+  - For the PowercapReader, download the jar of the latest release and place it in a directory on your local environment. You can also build the project yourself. The location needs to be configured in the `powercap_jar_path` property of the experiment configuration YAML files. The following is an example configuration:
+    - `powercap_jar_path`: C:\tools\powercap-reader\target\powercap-reader-1.0-runner.jar
+- [ProcFSReader](https://github.com/hm-green-it-lab/procfs-reader)
+    - For the ProcFSReader, download the jar of the latest release and place it in a directory on your local environment. You can also build the project yourself. The location needs to be configured in the `procfs_jar_path` property of the experiment configuration YAML files. The following is an example configuration: 
 - Java (JDK 21+)
 - Docker (20.10.14+)
 - [RittalReader](https://github.com/hm-green-it-lab/rittal-reader)

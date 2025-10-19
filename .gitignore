@@ -22,3 +22,6 @@
 /power_consumption_boxplots_all_loads.pdf
 /power_consumption_combined_barchart.pdf
 /process_power_consumption_boxplots_all_loads.pdf
+/EXPERIMENT_AUTOMATION/output/
+/transaction_power_consumption_boxplots_all_loads.pdf
+/EXPERIMENT_AUTOMATION/.env
