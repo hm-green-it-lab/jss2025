@@ -51,37 +51,40 @@ spring-rest-service
 ├── docker-compose.override.scaphandre.yaml
 ├── docker-compose.yaml
 ├── joularjx
-│   ├── config.properties
-│   ├── joularjx-3.0.1.jar
-│   ├── joularjx-result
-│   ├── results
-│   └── zip
-└── otel
-    ├── io.retit.opentelemetry.javaagent.extension.jar
-    ├── opentelemetry-javaagent.jar
-    ├── otel_version
-    └── otjae_version
+    ├── config.properties
+    ├── joularjx-3.0.1.jar
+    ├── joularjx-result
+    ├── results
+    └── zip
 ```
 
 - `docker-compose.yaml` is the base compose file describing the Spring REST application.
 - The `docker-compose.override.*.yaml` files provide tool-specific overrides. Each override file enables and configures one measurement tooling stack (for example, Kepler, Scaphandre, JoularJX, or OTJAE).
 - The `joularjx/` directory contains the JoularJX agent jar and its configuration/results directories.
-- The `otel/` directory contains the OpenTelemetry agent(s) and the OpenTelemetry Java Agent Extension (OTJAE) artifacts used for OT-based attribution.
 
-### OTJAE (OpenTelemetry Java-Agent Extension) build
+### Spring REST Service Container Build
 
-For using the OTJAE project (the OpenTelemetry Java-Agent Extension), you need to build `io.retit.opentelemetry.javaagent.extension.jar`. Assume you have git, Java (JDK 11+), and Maven installed on the machine used to build the artifact.
+For using the Spring REST service docker container referenced in the docker-compose files, you need to build the container called `spring-rest-service:feature` (see https://github.com/RETIT/opentelemetry-javaagent-extension/tree/main/examples/spring-rest-service). The following steps assume that you have git, docker, and Java (JDK 21+) installed on the machine used to build the artifact.
 
 ```bash
 # clone the OTJAE repository
 git clone https://github.com/RETIT/opentelemetry-javaagent-extension.git
 cd opentelemetry-javaagent-extension
 
-# Build the project and package the extension - skip tests for speed if you prefer
-mvn -DskipTests package
+# In the paper, we have used v0.0.17-alpha, but in case you want to use a different version, you can checkout the corresponding tag
+git checkout tags/v0.0.17-alpha
 
-# After a successful build locate the produced jar under target/ and copy it to your server folder
-cp extension-core/target/io.retit.opentelemetry.javaagent.extension-*.jar ../path/to/spring-rest-service/otel/io.retit.opentelemetry.javaagent.extension.jar
+# On Linux, you need to make the mvnw script executable (only required in v0.0.17-alpha and earlier)
+chmod +x ./mvnw
+
+# Build the project and package the extension - skip tests for speed if you prefer
+# Requires JAVA_HOME to be set to the JDK installation path
+./mvnw -DskipTests package
+
+# After a successful build you can check if the docker container is built correctly
+docker images | grep spring-rest-service
+# You can also test the container locally as follows
+docker run spring-rest-service:feature
 ```
 
 ### JMeter server layout (brief)
