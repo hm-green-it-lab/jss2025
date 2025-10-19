@@ -1,3 +1,13 @@
+"""
+visualizeLoadLevelTransactionPowerConsumptionAsBoxplots.py
+
+Compute per-transaction power consumption estimates for OTJAE and JoularJX and produce boxplots grouped by load level. This script contains specialized parsers for OTJAE log formats and JoularJX per-method power files, and uses procfs + powercap harmonization to attribute system power to transactions.
+
+Key features
+- `parse_otjae_transaction_resource` extracts per-second transaction resource usage from OTJAE logs.
+- `parse_joularjx_transaction_power` reads JoularJX method-level CSVs and computes per-invocation and per-second power estimates.
+"""
+
 # Global constants for OTJAE power calculations
 MEMORY_POWER_W_PER_GB = 0.392
 NETWORK_POWER_W_PER_GB = 1.0

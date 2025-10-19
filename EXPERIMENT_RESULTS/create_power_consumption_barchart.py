@@ -1,3 +1,13 @@
+"""
+create_power_consumption_barchart.py
+
+Utilities to load power measurement files (Rittal EM and Intel RAPL/powercap), aggregate them per load level and tool, and produce a combined bar chart.
+
+It also contains static values in the SCENARIO_CONSTANTS to avoid a recomputation of the transaction-level results.
+
+This file is intended for offline analysis of experiment folders arranged under numeric load-level directories (e.g. `./230/`). It expects CSVs with certain column names as produced by the measurement tooling.
+"""
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -137,16 +147,25 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
     }
 
     for load_level in load_levels:
-        load_dir = Path(str(load_level))
-        if not load_dir.exists():
-            print(f"Directory not found: {load_dir}")
+        # Search all run folders that start with the load level (e.g., 230, 230_run2, 230_run3)
+        base_dir = Path.cwd()
+        run_dirs = [d for d in base_dir.iterdir() if d.is_dir() and d.name.startswith(str(load_level))]
+
+        if not run_dirs:
+            print(f"No run directories starting with {load_level} found in: {base_dir}")
             continue
 
-        # Search for all experiment directories ending with '_spring_docker_tools'
-        experiment_dirs = [d for d in load_dir.glob("**/2025*") if d.is_dir() and d.name.endswith('_spring_docker_tools')]
+        # Collect all experiment directories ending with '_spring_docker_tools'
+        experiment_dirs = []
+        for run_dir in run_dirs:
+            if run_dir.name.endswith('_spring_docker_tools'):
+                experiment_dirs.append(run_dir)
+
+            found = [d for d in run_dir.glob("**/2025*") if d.is_dir() and d.name.endswith('_spring_docker_tools')]
+            experiment_dirs.extend(found)
 
         if not experiment_dirs:
-            print(f"No directories ending with '_spring_docker_tools' found in: {load_dir}")
+            print(f"No directories ending with '_spring_docker_tools' found for load {load_level}")
             continue
 
         for exp_dir in experiment_dirs:
@@ -194,8 +213,6 @@ def create_power_consumption_barchart(load_levels, output_path, trim_seconds=0):
     if df.empty:
         print("Warning: No data collected. Please check if the directories and files exist.")
         return
-
-
 
     # --- Color palette and tool mapping (from visualizePowerCapAsBoxplot.py) ---
     run_order = ["none", "OTJAE", "JoularJX", "Scaphandre", "Kepler"]

@@ -1,4 +1,4 @@
-# reader-flow
+# Experiment automation with "reader-flow"
 
 **`reader-flow`** is a Python-based orchestration tool for coordinating energy and performance measurement experiments across distributed systems.  
 It integrates power and performance readers (e.g., RAPL, ProcFS, SNMP/Rittal), load generators (JMeter), and service lifecycle hooks to enable reproducible, parameterized, and synchronized measurement scenarios.

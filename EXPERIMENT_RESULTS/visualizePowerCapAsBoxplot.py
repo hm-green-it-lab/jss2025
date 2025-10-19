@@ -1,3 +1,9 @@
+"""
+visualizePowerCapAsBoxplot.py
+
+Creates boxplots from raw powercap energy CSV files (energy in micro-Joules). This script converts energy deltas into power (Watts) and aggregates runs into boxplots by load and run type.
+"""
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd

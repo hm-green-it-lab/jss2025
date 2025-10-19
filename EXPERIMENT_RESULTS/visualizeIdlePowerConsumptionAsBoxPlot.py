@@ -1,3 +1,8 @@
+"""
+visualizeIdlePowerConsumptionAsBoxPlot.py
+
+Create boxplots for idle power consumption across different experimental scenarios. The script supports EM (Rittal) and RAPL (powercap) inputs and produces a two-panel figure comparing the two measurement types.
+"""
 
 import pandas as pd
 import numpy as np

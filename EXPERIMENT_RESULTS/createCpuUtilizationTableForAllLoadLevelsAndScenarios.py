@@ -1,3 +1,9 @@
+"""
+createCpuUtilizationTableForAllLoadLevelsAndScenarios.py
+
+Scan experiment result folders and compute mean CPU utilization per load and scenario. The script generates LaTeX table output (printed to stdout) suitable for inclusion in a report.
+"""
+
 # Import required libraries
 import pandas as pd
 import numpy as np

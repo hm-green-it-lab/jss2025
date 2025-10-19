@@ -1,8 +1,5 @@
 services:
   spring-rest-service:
-    #volumes:
-    #  - "./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar"
-    #  - "./otel/io.retit.opentelemetry.javaagent.extension.jar:/otel/io.retit.opentelemetry.javaagent.extension.jar"
     environment:
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar -Dotel.javaagent.extensions=/otel/io.retit.opentelemetry.javaagent.extension.jar
       - OTEL_SERVICE_NAME=spring-rest-service

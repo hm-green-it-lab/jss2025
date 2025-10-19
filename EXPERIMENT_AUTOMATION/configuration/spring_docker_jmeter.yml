@@ -25,7 +25,7 @@ jmeter:
   enabled: true
   download_logs: true   # default True; set false to fetch only .jtl
   # Where JMeter runs and how to connect
-  target_host: odoo.cs.hm.edu
+  target_host: 127.0.0.1
   remote_dir: /home/jmeter/output/         # <— used for .jtl and .log (timestamped)
   bin_path: /home/jmeter/apache-jmeter-5.6.3/bin/jmeter.sh
 

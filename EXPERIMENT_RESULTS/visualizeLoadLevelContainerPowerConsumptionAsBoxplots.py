@@ -1,3 +1,11 @@
+"""
+visualizeLoadLevelContainerPowerConsumptionAsBoxplots.py
+
+Collect container-level power measurements (container metrics like Kepler, Scaphandre or aggregated package-level RAPL) and produce per-load boxplots.
+
+The module contains parsers for specialized HTTP logger metric files as well as helpers to aggregate Rittal and powercap inputs. It can also print LaTeX tables summarizing container power by load.
+"""
+
 def parse_kepler_http_logger(file_path, service_pids, trim_seconds=0, jmeter_bounds=None):
     """
     Parses a large http_logger_spring_docker_kepler file, extracts kepler_process_cpu_watts for the given service_pids.

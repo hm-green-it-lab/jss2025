@@ -1,3 +1,12 @@
+"""
+visualizeLoadLevelProcessPowerConsumptionAsBoxplots.py
+
+Estimate per-process power consumption and generate boxplots grouped by load level. This script contains helpers to parse procfs, powercap and other experiment logs and uses attribution models to distribute system-level power to processes (e.g., using procfs CPU fractions) and to add memory/storage power contributions.
+
+Constants
+- MEMORY_POWER_W_PER_GB, NETWORK_POWER_W_PER_GB, STORAGE_POWER_W_PER_TB are used as conversion factors for memory, network and storage demands.
+"""
+
 # Global constants for OTJAE power calculations
 MEMORY_POWER_W_PER_GB = 0.392
 NETWORK_POWER_W_PER_GB = 1.0
