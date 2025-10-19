@@ -169,7 +169,7 @@ For each load level, the experiment was repeated three times to ensure validity.
 
 ## Python Scripts for Generating Figures and Tables
 
-This repository contains several Python scripts for processing, analyzing, and visualizing the experimental results. These scripts are located in the [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/) folder:
+This repository contains several Python scripts for processing, analyzing, and visualizing the experimental results. These scripts are located in the [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/) folder. Most of the scripts are designed to be executed from the top-level folder of the repository (e.g., `python ./EXPERIMENT_RESULTS/createCpuUtilizationTableForAllLoadLevelsAndScenarios.py`). The only exceptions are the `create_power_consumption_barchart.py` and `visualizePowerCapAsBoxplot.py` scripts, which need to be executed from within the [`EXPERIMENT_RESULTS/`](./EXPERIMENT_RESULTS/) folder. 
 
 | Script Name | Description |
 | --- | --- |
